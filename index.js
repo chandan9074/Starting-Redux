@@ -1,8 +1,12 @@
 // import pakages 
 
 const redux = require('redux')
+const reduxLogger = require('redux-logger')
+
 const createStore = redux.createStore
 const combineReducers = redux.combineReducers
+const applyMiddleware = redux.applyMiddleware
+const logger = reduxLogger.createLogger()
 
 // create action types here
 const buy_cake = "buy_cake";
@@ -80,11 +84,11 @@ const root_reducers = combineReducers({
 })
 
 // create store
-const store = createStore(root_reducers)
+const store = createStore(root_reducers, applyMiddleware(logger))
 console.log("initial state", store.getState())
 
 // subscribe the state
-const unsubscribe =  store.subscribe(()=>console.log("update state", store.getState()))
+const unsubscribe =  store.subscribe(()=>{})
 
 // dispatch actions
 store.dispatch(buyCake())
